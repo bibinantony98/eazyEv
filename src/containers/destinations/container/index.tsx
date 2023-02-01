@@ -7,9 +7,12 @@ import { DestinationReducer, PlacesData } from "../model";
 import { ResponseType } from "../../../constants";
 import "./destination.scss";
 import { clearGetAllPlaces, getAllPlaces } from "../redux/action";
+import { Locations } from "../../../locations";
+import { useNavigate } from "react-router-dom";
 
 export const Destination: FunctionComponent = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { Option } = Select;
 	const destinationReducer: DestinationReducer = useSelector((state: AppStore) => state.destinationReducer);
 	const [places, setPlaces] = useState<PlacesData[]>([]);
@@ -31,6 +34,13 @@ export const Destination: FunctionComponent = () => {
 
 	const placeDataChanged = (id: number[]) => {
 		setPlaceValue(id);
+	};
+
+	const explore = () => {
+		navigate({
+			pathname: Locations.RESULT,
+			search: `?placesId=${placeValue?.join(",")}`
+		});
 	};
 
 	return (
@@ -57,7 +67,7 @@ export const Destination: FunctionComponent = () => {
 							})}
 						</Select>
 					</div>
-					<button className="primary_border_btn destination_btn ml-3">Explore</button>
+					<button onClick={() => explore()} className="primary_border_btn destination_btn ml-3">Explore</button>
 				</div>
 			</div>
 		</div>

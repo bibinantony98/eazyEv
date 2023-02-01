@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react";
-import { useNavigate } from "react-router-dom";
+import { FunctionComponent, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Locations } from "../../../../locations";
 import "./places.scss";
 
@@ -8,6 +8,15 @@ export interface PlacesProps {
 }
 
 export const Places: FunctionComponent<PlacesProps> = (props) => {
+	const [searchParams] = useSearchParams();
+	
+
+
+	useEffect(() => {
+		const places = searchParams.get("farmer");
+		console.log(places);
+	}, [searchParams]);
+
 	const navigate = useNavigate();
 	return (
 		<div className="place_container">
