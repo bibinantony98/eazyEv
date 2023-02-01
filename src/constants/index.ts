@@ -6,3 +6,8 @@ export enum Language {
     ENGLISH = "en",
     RUSSIAN = "ru"
 }
+
+export enum ResponseType {
+    FULFILLED = "FULFILLED",
+    REJECTED = "REJECTED"
+}
