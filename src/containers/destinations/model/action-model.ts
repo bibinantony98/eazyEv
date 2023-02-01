@@ -17,7 +17,7 @@ interface ClearGetAllPlaces {
 }
 
 interface GetPlacesData {
-    type: Events.GET_ALL_PLACES;
+    type: Events.GET_PLACE_DATA;
     payload: AxiosPromise;
 }
 interface GetPlacesDataFulfilled {
@@ -28,7 +28,7 @@ interface GetPlacesDataRejected {
     type: Events.GET_ALL_PLACES_REJECTED;
 }
 interface ClearGetPlacesData {
-    type: Events.CLEAR_GET_ALL_PLACES;
+    type: Events.CLEAR_GET_PLACE_DATA;
 }
 
 export type Action = 

@@ -2,13 +2,13 @@ import { Action } from "../../../model";
 import Events  from "./events";
 import { DestinationReducer } from "../model";
 import { ResponseType } from "../../../constants";
-import { initPlacesData } from "../init";
+import { initPlaceListData, initPlacesData } from "../init";
 
 const initialState: DestinationReducer = {
 	getAllPlacesCompleted: null,
-	placesData: [initPlacesData()]
-	// getAllPlacesListingData: null,
-	// placeListData: [initPlaceListData()]
+	placesData: [initPlacesData()],
+	getAllPlacesListingData: null,
+	placeListData: [initPlaceListData()]
 };
 
 const reducer = (state:  DestinationReducer = initialState, action: Action) : DestinationReducer => {
@@ -35,28 +35,28 @@ const reducer = (state:  DestinationReducer = initialState, action: Action) : De
 				...state,
 				getAllPlacesCompleted: null
 			};
-		// case Events.GET_PLACE_DATA:
-		// 	return {
-		// 		...state,
-		// 		getAllPlacesListingData: null,
-		// 		placeListData: [initCategoryData()]
-		// 	};
-		// case Events.GET_PLACE_DATA_FULFILLED:
-		// 	return {
-		// 		...state,
-		// 		getAllPlacesListingData: ResponseType.FULFILLED,
-		// 		placeListData: action.payload.data.data.data
-		// 	};
-		// case Events.GET_PLACE_DATA_REJECTED:
-		// 	return {
-		// 		...state,
-		// 		getAllPlacesListingData: ResponseType.REJECTED
-		// 	};
-		// case Events.CLEAR_GET_PLACE_DATA:
-		// 	return {
-		// 		...state,
-		// 		getAllPlacesListingData: null
-		// 	};
+		case Events.GET_PLACE_DATA:
+			return {
+				...state,
+				getAllPlacesListingData: null,
+				placeListData: [initPlaceListData()]
+			};
+		case Events.GET_PLACE_DATA_FULFILLED:
+			return {
+				...state,
+				getAllPlacesListingData: ResponseType.FULFILLED,
+				placeListData: action.payload.data
+			};
+		case Events.GET_PLACE_DATA_REJECTED:
+			return {
+				...state,
+				getAllPlacesListingData: ResponseType.REJECTED
+			};
+		case Events.CLEAR_GET_PLACE_DATA:
+			return {
+				...state,
+				getAllPlacesListingData: null
+			};
 		default:
 			return state;
 	}
