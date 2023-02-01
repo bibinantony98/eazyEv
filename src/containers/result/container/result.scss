@@ -1,0 +1,10 @@
+.places_main_wrapper {
+    height: 100%;
+    padding: 15px 30px;
+    .pagination_switch_container {
+        text-align: right;
+    }
+    .place_out_pagination_container {
+        height: calc(100% - 32px);
+    }
+}

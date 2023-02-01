@@ -22,3 +22,18 @@ html, body {
     border: 1px solid var(--themeColor);
     min-height: 32px;
 }
+.no_btn_theme {
+    background-color: var(--white);
+    color: var(--themeColor);
+    padding: 0px 20px;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 4px;
+    border: none;
+    min-height: 32px;
+    &:disabled,
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
