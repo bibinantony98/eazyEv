@@ -11,8 +11,8 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 	const [searchParams] = useSearchParams();
 	
 	useEffect(() => {
-		const places = searchParams.get("farmer");
-		console.log(places);
+		const places = searchParams.get("placesId");
+		console.log(places?.split(","));
 	}, [searchParams]);
 
 	const navigate = useNavigate();

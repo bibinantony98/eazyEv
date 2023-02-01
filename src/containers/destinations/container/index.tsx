@@ -16,7 +16,7 @@ export const Destination: FunctionComponent = () => {
 	const { Option } = Select;
 	const destinationReducer: DestinationReducer = useSelector((state: AppStore) => state.destinationReducer);
 	const [places, setPlaces] = useState<PlacesData[]>([]);
-	const [placeValue, setPlaceValue] = useState<number[] | undefined>();
+	const [placeValue, setPlaceValue] = useState<number[]>([1, 2, 3]);
 
 	useEffect(() => {
 		dispatch(getAllPlaces());
@@ -67,7 +67,7 @@ export const Destination: FunctionComponent = () => {
 							})}
 						</Select>
 					</div>
-					<button onClick={() => explore()} className="primary_border_btn destination_btn ml-3">Explore</button>
+					<button disabled={!placeValue.length} onClick={() => explore()} className="primary_border_btn destination_btn ml-3">Explore</button>
 				</div>
 			</div>
 		</div>
