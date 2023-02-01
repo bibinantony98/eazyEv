@@ -10,8 +10,6 @@ export interface PlacesProps {
 export const Places: FunctionComponent<PlacesProps> = (props) => {
 	const [searchParams] = useSearchParams();
 	
-
-
 	useEffect(() => {
 		const places = searchParams.get("farmer");
 		console.log(places);
