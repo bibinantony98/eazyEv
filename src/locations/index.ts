@@ -1,4 +1,5 @@
-enum locations {
-	DASHBOARD = "/"
+export enum Locations {
+	DASHBOARD = "/",
+	DESTINATION = "/destination",
+	RESULT = "/result"
 }
-export default locations;
