@@ -1,10 +1,38 @@
 import { Select } from "antd";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppStore } from "../../../model/store.model";
 import LogoSvg from "../components/logo-svg";
+import { DestinationReducer, PlacesData } from "../model";
+import { ResponseType } from "../../../constants";
 import "./destination.scss";
+import { clearGetAllPlaces, getAllPlaces } from "../redux/action";
 
 export const Destination: FunctionComponent = () => {
+	const dispatch = useDispatch();
 	const { Option } = Select;
+	const destinationReducer: DestinationReducer = useSelector((state: AppStore) => state.destinationReducer);
+	const [places, setPlaces] = useState<PlacesData[]>([]);
+	const [placeValue, setPlaceValue] = useState<number[] | undefined>();
+
+	useEffect(() => {
+		dispatch(getAllPlaces());
+	}, []);
+
+	useEffect(() => {
+		if (destinationReducer.getAllPlacesCompleted === ResponseType.FULFILLED) {
+			setPlaces(destinationReducer.placesData);
+			dispatch(clearGetAllPlaces());
+		}
+		if (destinationReducer.getAllPlacesCompleted === ResponseType.REJECTED) {
+			dispatch(clearGetAllPlaces());
+		}
+	}, [destinationReducer.getAllPlacesCompleted]);
+
+	const placeDataChanged = (id: number[]) => {
+		setPlaceValue(id);
+	};
+
 	return (
 		<div className="destination_container">
 			<div className="destination_bg">
@@ -19,10 +47,14 @@ export const Destination: FunctionComponent = () => {
 						<Select 
 							mode="multiple"
 							allowClear
+							value={placeValue}
+							onChange={placeDataChanged}
 						>
-							<Option key={"key"} value={1}>
-								{"test"}
-							</Option>
+							{places.map((data, i: number) => {
+								return (
+									<Option key={`places_select_${i}`} value={data.id}>{data.name}</Option>
+								);
+							})}
 						</Select>
 					</div>
 					<button className="primary_border_btn destination_btn ml-3">Explore</button>
