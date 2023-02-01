@@ -12,11 +12,11 @@ export const clearGetAllPlaces = (): Action => ({
 	type: events.CLEAR_GET_ALL_PLACES
 });
 
-// export const getPlacesData = (id: number, query: string): Action => ({
-// 	type: events.GET_PLACE_DATA,
-// 	payload: axios.get(`${config.API_URL}/municipality/${id}/address-book-category?${query}`)
-// });
+export const getPlacesData = (query: string[] | undefined): Action => ({
+	type: events.GET_PLACE_DATA,
+	payload: axios.get(`${config.API_URL}/placeList?${query}`)
+});
 
-// export const clearGetPlacesData = (): Action => ({
-// 	type: events.CLEAR_GET_PLACE_DATA
-// });
+export const clearGetPlacesData = (): Action => ({
+	type: events.CLEAR_GET_PLACE_DATA
+});

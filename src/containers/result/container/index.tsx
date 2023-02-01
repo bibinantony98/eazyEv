@@ -1,6 +1,12 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import "./result.scss";
 import Places from "./places";
+import { useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearGetPlacesData, getPlacesData } from "../../destinations/redux/action";
+import { DestinationReducer, PlacesListingData } from "../../destinations/model";
+import { AppStore } from "../../../model/store.model";
+import { ResponseType } from "../../../constants";
 
 const data = [
 	{
@@ -38,8 +44,27 @@ const data = [
 ];
 
 export const Result: FunctionComponent = () => {
+	const dispatch = useDispatch();
 	const [index, setIndex] = useState(0);
+	const [places, setPlaces] = useState<PlacesListingData[]>([]);
+	const resultReducer: DestinationReducer = useSelector((state: AppStore) => state.destinationReducer);
+	const [searchParams] = useSearchParams();
+	
+	useEffect(() => {
+		const places = searchParams.get("placesId");
+		dispatch(getPlacesData(places?.split(",")));
+	}, [searchParams]);
 
+	useEffect(() => {
+		if (resultReducer.getAllPlacesCompleted === ResponseType.FULFILLED) {
+			setPlaces([...places, ...resultReducer.placeListData]);
+			dispatch(clearGetPlacesData());
+		}
+		if (resultReducer.getAllPlacesCompleted === ResponseType.REJECTED) {
+			dispatch(clearGetPlacesData());
+		}
+	}, [resultReducer.getAllPlacesCompleted]);
+	
 	const prevClicked = () => {
 		setIndex((prev) => prev - 1);	
 	};
