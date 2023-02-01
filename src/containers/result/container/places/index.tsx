@@ -25,13 +25,13 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 			</div>
 			<div className="places_content_container">
 				<div className="places_image_container">
-					{props.data.images.map((d: any, i: number) => {
-						return (
-							<div className="places_image_holder" key={`place_img_${i}`}>
-								<img src={d.url}  />
-							</div>	
-						);
-					})}
+					{/* {props.data.placeImageUrl.map((d: any, i: number) => {
+						return ( */}
+					<div className="places_image_holder">
+						<img src={props.data.imageUrl} alt="Place Image Will visible here" />
+					</div>	
+					{/* );
+					})} */}
 				</div>
 				<div className="w-100 py-3 h-100">
 					<div className="place_details_container">
@@ -45,10 +45,10 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
                             1960s with the release
 						</p>
 						<div className="best_time_weather">
-                            Best time to visit: {props.data.bestSeason}
+                            Best time to visit: {props.data.season}
 						</div>
 						<div className="best_time_weather">
-                            Wether: {props.data.wether}°C
+                            Weather: {props.data.weather}°C
 						</div>
 						<div className="top_list_header mt-2">
 							<div className="d-flex align-items-center justify-content-between w-100">
@@ -57,7 +57,7 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 								Top Hotels
 								</div>		
 								<div className="">
-									Average hotel price: {props.data.averageHotelPrice}$
+									Average hotel price: {props.data.avgPrice ? props.data.avgPrice : 2000}$
 								</div>
 							</div>
 							
@@ -65,7 +65,7 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 						<div className="divider"></div>
 						<div className="top_list_container">
 							<div className="top_list_content">
-								{props.data.topHotel.map((d: any) => {
+								{props.data.hotels.map((d: any) => {
 									return (
 										<div className="top_list" key={`top_hotel_${d.name}`}>
 											<div className="top_list_image_container">
@@ -76,7 +76,6 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 											<div className="top_list_name">
 												{d.name}
 											</div>   
-										
 										</div>
 									);
 								})}  
@@ -92,21 +91,20 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 						</div>
 						<div className="top_list_container">
 							<div className="top_list_content">
-								{props.data.recreations.map((d: any) => {
-									return (
-										<div className="top_list" key={`top_hotel_${d.name}`}>
-											<div className="top_list_image_container">
-												<div className="top_list_image">
-													<img src={d.img} alt="" />
-												</div>
-											</div>
-											<div className="top_list_name">
-												{d.name}
-											</div>   
-										
+								{/* {props.data.recreations.map((d: any) => {
+									return ( */}
+								<div className="top_list">
+									<div className="top_list_image_container">
+										<div className="top_list_image">
+											<img src={props.data.recreationImageUrl} alt="" />
 										</div>
-									);
-								})} 
+									</div>
+									<div className="top_list_name">
+										{props.data.recreation}
+									</div>   		
+								</div>
+								{/* );
+								})}  */}
 							</div>
 							<div className="top_list_next" onClick={() => topNavigate(Locations.RESULT_RECREATION)}>
 								<img src="/images/next.png" />

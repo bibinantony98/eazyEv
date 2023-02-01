@@ -14,7 +14,7 @@ export const clearGetAllPlaces = (): Action => ({
 
 export const getPlacesData = (query: string[] | undefined): Action => ({
 	type: events.GET_PLACE_DATA,
-	payload: axios.get(`${config.API_URL}/placeList?${query}`)
+	payload: axios.get(`${config.API_URL}/placeDetail?placeIdList=${query}`)
 });
 
 export const clearGetPlacesData = (): Action => ({

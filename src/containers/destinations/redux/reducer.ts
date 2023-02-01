@@ -13,12 +13,6 @@ const initialState: DestinationReducer = {
 
 const reducer = (state:  DestinationReducer = initialState, action: Action) : DestinationReducer => {
 	switch (action.type) {
-		case Events.GET_ALL_PLACES:
-			return {
-				...state,
-				getAllPlacesCompleted: null,
-				placesData: [initPlacesData()]
-			};
 		case Events.GET_ALL_PLACES_FULFILLED:
 			return {
 				...state,
@@ -34,12 +28,6 @@ const reducer = (state:  DestinationReducer = initialState, action: Action) : De
 			return {
 				...state,
 				getAllPlacesCompleted: null
-			};
-		case Events.GET_PLACE_DATA:
-			return {
-				...state,
-				getAllPlacesListingData: null,
-				placeListData: [initPlaceListData()]
 			};
 		case Events.GET_PLACE_DATA_FULFILLED:
 			return {

@@ -16,7 +16,7 @@ export const Destination: FunctionComponent = () => {
 	const { Option } = Select;
 	const destinationReducer: DestinationReducer = useSelector((state: AppStore) => state.destinationReducer);
 	const [places, setPlaces] = useState<PlacesData[]>([]);
-	const [placeValue, setPlaceValue] = useState<number[]>([1, 2, 3]);
+	const [placeValue, setPlaceValue] = useState<number[]>([]);
 
 	useEffect(() => {
 		dispatch(getAllPlaces());
