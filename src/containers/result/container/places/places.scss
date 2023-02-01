@@ -6,6 +6,8 @@
         font-family: 'semi-bold';
         text-align: right;
         text-transform: capitalize;
+        position: relative;
+        top: 19px;
     }
     .places_content_container {
         height: calc(100% - 35px);

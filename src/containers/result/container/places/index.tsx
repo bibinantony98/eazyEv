@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Locations } from "../../../../locations";
 import "./places.scss";
@@ -9,13 +9,15 @@ export interface PlacesProps {
 
 export const Places: FunctionComponent<PlacesProps> = (props) => {
 	const [searchParams] = useSearchParams();
-	
-	useEffect(() => {
-		const places = searchParams.get("placesId");
-		console.log(places?.split(","));
-	}, [searchParams]);
-
 	const navigate = useNavigate();
+
+	const topNavigate = (path: any) => {
+		navigate({
+			pathname: path,
+			search: `?placesId=${searchParams.get("placesId")}`
+		});
+	};
+
 	return (
 		<div className="place_container">
 			<div className="place_name_container">
@@ -79,7 +81,7 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 									);
 								})}  
 							</div>
-							<div className="top_list_next" onClick={() => navigate(Locations.RESULT_HOTEL)}>
+							<div className="top_list_next" onClick={() => topNavigate(Locations.RESULT_HOTEL)}>
 								<img src="/images/next.png" />
 							</div>	 
 						</div>
@@ -106,7 +108,7 @@ export const Places: FunctionComponent<PlacesProps> = (props) => {
 									);
 								})} 
 							</div>
-							<div className="top_list_next">
+							<div className="top_list_next" onClick={() => topNavigate(Locations.RESULT_RECREATION)}>
 								<img src="/images/next.png" />
 							</div>	 
 						</div>

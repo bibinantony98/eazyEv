@@ -3,8 +3,10 @@
     padding: 15px 30px;
     .pagination_switch_container {
         text-align: right;
+        position: relative;
+        top: -12px;
     }
     .place_out_pagination_container {
-        height: calc(100% - 32px);
+        height: calc(100% - 32px);   
     }
 }
